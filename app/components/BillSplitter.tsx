@@ -178,7 +178,7 @@ export default function BillSplitter() {
       <div className="max-w-7xl mx-auto">
         <header className="mb-10">
           <h1 className="text-4xl font-extrabold tracking-tight text-zinc-900 mb-2">
-            KanyaKanyang<span className="text-blue-600">Bayad</span>
+            KK<span className="text-blue-600">Bill</span>
           </h1>
           <p className="text-zinc-500 font-medium">Split bills without the headache.</p>
         </header>
