@@ -21,6 +21,7 @@ interface ItemListProps {
     onRemoveItem: (id: string) => void;
     onUpdateItem: (id: string, updates: Partial<LineItem>) => void;
     onTogglePerson: (itemId: string, personName: string) => void;
+    onClearItems: () => void;
 }
 
 export default function ItemList({
@@ -30,19 +31,30 @@ export default function ItemList({
     onRemoveItem,
     onUpdateItem,
     onTogglePerson,
+    onClearItems,
 }: ItemListProps) {
     return (
         <div className="space-y-4">
             <div className="flex items-center justify-between mb-2">
                 <h2 className="text-lg font-bold text-zinc-900 tracking-tight">The Bill</h2>
-                <span className="text-xs font-medium text-zinc-400 bg-zinc-100 px-2 py-1 rounded-full">{items.length} items</span>
+                <div className="flex items-center gap-2">
+                    <span className="text-xs font-medium text-zinc-400 bg-zinc-100 px-2 py-1 rounded-full">{items.length} items</span>
+                    {items.length > 0 && (
+                        <button
+                            onClick={onClearItems}
+                            className="text-xs font-medium text-red-500 hover:text-red-700 px-2 py-1 rounded-full hover:bg-red-50 transition-all"
+                        >
+                            Clear All
+                        </button>
+                    )}
+                </div>
             </div>
 
             <div className="space-y-4">
                 {items.map((item) => (
                     <div
                         key={item.id}
-                        className="group bg-white rounded-3xl p-5 shadow-sm border border-zinc-100 hover:border-zinc-200 hover:shadow-md transition-all"
+                        className="relative group bg-white rounded-3xl p-5 shadow-sm border border-zinc-100 hover:border-zinc-200 hover:shadow-md transition-all"
                     >
                         {/* Top Row: Name and Price */}
                         <div className="flex gap-4 mb-4">
@@ -138,7 +150,8 @@ export default function ItemList({
 
                         <button
                             onClick={() => onRemoveItem(item.id)}
-                            className="absolute top-4 right-4 opacity-0 group-hover:opacity-100 text-zinc-300 hover:text-red-500 transition-all"
+                            className="absolute bottom-4 right-4 w-8 h-8 flex items-center justify-center rounded-lg bg-red-50 text-red-400 hover:bg-red-500 hover:text-white transition-all"
+                            aria-label="Remove item"
                         >
                             <Trash2 size={16} />
                         </button>

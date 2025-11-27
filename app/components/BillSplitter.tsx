@@ -20,30 +20,12 @@ interface Person {
 }
 
 export default function BillSplitter() {
-  const [items, setItems] = useState<LineItem[]>([
-    {
-      id: '1',
-      name: 'Grilled Salmon',
-      price: 28.5,
-      quantity: 1,
-      assignedTo: ['Alice'],
-    },
-    {
-      id: '2',
-      name: 'Caesar Salad',
-      price: 12.0,
-      quantity: 1,
-      assignedTo: ['Bob'],
-    },
-  ]);
+  const [items, setItems] = useState<LineItem[]>([]);
 
-  const [people, setPeople] = useState<Person[]>([
-    { id: '1', name: 'Alice' },
-    { id: '2', name: 'Bob' },
-  ]);
+  const [people, setPeople] = useState<Person[]>([]);
 
-  const [vatRate, setVatRate] = useState(15); // 15%
-  const [serviceChargeRate, setServiceChargeRate] = useState(10); // 10%
+  const [vatRate, setVatRate] = useState(0);
+  const [serviceChargeRate, setServiceChargeRate] = useState(0);
   const [tipAmount, setTipAmount] = useState(0);
 
   // Calculations
@@ -150,6 +132,10 @@ export default function BillSplitter() {
     setItems(items.filter((item) => item.id !== id));
   };
 
+  const clearItems = () => {
+    setItems([]);
+  };
+
   const updateItem = (id: string, updates: Partial<LineItem>) => {
     setItems(
       items.map((item) => (item.id === id ? { ...item, ...updates } : item))
@@ -198,6 +184,7 @@ export default function BillSplitter() {
               onRemoveItem={removeItem}
               onUpdateItem={updateItem}
               onTogglePerson={togglePersonForItem}
+              onClearItems={clearItems}
             />
           </div>
 

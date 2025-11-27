@@ -42,8 +42,12 @@ export default function BillSummary({
                         <div className="flex items-center bg-zinc-800 rounded-lg px-2 py-1">
                             <input
                                 type="number"
-                                value={vatRate}
-                                onChange={(e) => onVatRateChange(parseFloat(e.target.value) || 0)}
+                                value={vatRate === 0 ? '' : vatRate}
+                                onChange={(e) => {
+                                    const val = e.target.value;
+                                    onVatRateChange(val === '' ? 0 : parseFloat(val));
+                                }}
+                                placeholder="0"
                                 className="w-8 bg-transparent border-none p-0 text-xs text-center text-white focus:ring-0"
                             />
                             <span className="text-zinc-500 text-xs">%</span>
@@ -59,8 +63,12 @@ export default function BillSummary({
                         <div className="flex items-center bg-zinc-800 rounded-lg px-2 py-1">
                             <input
                                 type="number"
-                                value={serviceChargeRate}
-                                onChange={(e) => onServiceChargeRateChange(parseFloat(e.target.value) || 0)}
+                                value={serviceChargeRate === 0 ? '' : serviceChargeRate}
+                                onChange={(e) => {
+                                    const val = e.target.value;
+                                    onServiceChargeRateChange(val === '' ? 0 : parseFloat(val));
+                                }}
+                                placeholder="0"
                                 className="w-8 bg-transparent border-none p-0 text-xs text-center text-white focus:ring-0"
                             />
                             <span className="text-zinc-500 text-xs">%</span>
@@ -76,8 +84,12 @@ export default function BillSummary({
                         <span className="text-zinc-500 text-sm mr-1">$</span>
                         <input
                             type="number"
-                            value={tipAmount}
-                            onChange={(e) => onTipAmountChange(parseFloat(e.target.value) || 0)}
+                            value={tipAmount === 0 ? '' : tipAmount}
+                            onChange={(e) => {
+                                const val = e.target.value;
+                                onTipAmountChange(val === '' ? 0 : parseFloat(val));
+                            }}
+                            placeholder="0.00"
                             className="w-full bg-transparent border-none p-0 text-sm text-right text-white focus:ring-0"
                         />
                     </div>
